@@ -1,26 +1,42 @@
 import React,{useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+//Actions de redux
+
 import { crearNuevoProductoAction } from '../actions/productosActions';
-const NuevoProducto = () => {
+const NuevoProducto = ({history}) => {
 
     //state del componente
-    const 
+    const [nombre,guardarNombre]=useState('');
+    const [precio,guardarPrecio]=useState(0);
 
     //usar useDispatch y te devuelve una function
+    //sirve para ejecutar las funcones de productos actions
     const dispatch = useDispatch();
 
-    //mandar ejecutar el action de productos actions
-    const agregarProducto = () => dispatch(crearNuevoProductoAction());
+    //useSelector acceder al state del store
+    const cargando=useSelector((state)=>state.productos.loading);
+    const error=useSelector((state)=>state.productos.error);
+    
+
+    //mandar ejecutar el action de productosActions
+    const agregarProducto = (producto) => dispatch(crearNuevoProductoAction(producto));
 
     //cuando el usuario haga submit
-    const submitNuevoProductoAction = e => {
+    const submitNuevoProducto = e => {
         e.preventDefault();
         //validad formulario
-
+        if(nombre.trim()===''|| precio<=0){
+            return;
+        }
         //si no hay errores
 
         //crear nuevo producto
-        agregarProducto();
+        //ejecutamos otra función local
+        agregarProducto({
+            nombre,precio
+        });
+
+        history.push('/');
 
     }
     return (
@@ -32,7 +48,7 @@ const NuevoProducto = () => {
                             Agregar Nuevo Producto
                         </h2>
                         <form
-                            onSubmit={submitNuevoProductoAction}
+                            onSubmit={submitNuevoProducto}
                         >
                             <div className="form-group">
                                 <label htmlFor="">Nombre producto</label>
@@ -41,6 +57,8 @@ const NuevoProducto = () => {
                                     className="form-control"
                                     placeholder="Nombre producto"
                                     name="nombre"
+                                    value={nombre}
+                                    onChange={e=>guardarNombre(e.target.value)}
                                 />
                             </div>
                             <div className="form-group">
@@ -50,6 +68,8 @@ const NuevoProducto = () => {
                                     className="form-control"
                                     placeholder="Precio producto"
                                     name="precio"
+                                    value={precio}
+                                    onChange={e=>guardarPrecio(Number(e.target.value))}
                                 />
                             </div>
                             <button type="submit"
@@ -57,6 +77,10 @@ const NuevoProducto = () => {
                                 Agregar
                             </button>
                         </form>
+                        {cargando ? <p>Cargando...</p> :null}
+
+                        {error ? <p className="alert alert-danger ps mt-4 text-center">Hubo un error</p> :null}
+
                     </div>
                 </div>
             </div>

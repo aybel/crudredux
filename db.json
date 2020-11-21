@@ -1,16 +1,6 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Jugo de Zanahoria",
-      "precio": "31111"
-    },
-    {
-      "id": 2,
-      "nombre": "Jugo de Naranja",
-      "precio": "1"
-    },
-    {
       "nombre": "Jugo de Naranja",
       "precio": "300",
       "id": 3
@@ -24,6 +14,26 @@
       "nombre": "Jugo de Fresa",
       "precio": "200",
       "id": 5
+    },
+    {
+      "nombre": "tequila",
+      "precio": 1200,
+      "id": 6
+    },
+    {
+      "nombre": "Vino",
+      "precio": 540,
+      "id": 7
+    },
+    {
+      "nombre": "Carmelo",
+      "precio": 23,
+      "id": 8
+    },
+    {
+      "nombre": "Granadas",
+      "precio": 5466,
+      "id": 10
     }
   ]
 }
