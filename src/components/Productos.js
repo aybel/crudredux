@@ -8,7 +8,7 @@ const Productos = () => {
         //consultar la api
         const obtenerProductos = () => dispatch(obtenerProductosAction());
         obtenerProductos();
-
+        //eslint-disabled-next-line
     }, []);
     //obtener el state
     const productos = useSelector((state) => state.productos.productos);
